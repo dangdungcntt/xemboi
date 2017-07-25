@@ -10,13 +10,14 @@ let TB6 = require('./tb6');
 
 module.exports = (params) => {
   return new Promise((resolve, reject) => {
-    const {
+    let {
       tentrai, ngaysinhtrai, thangsinhtrai, namsinhtrai,
       tengai, ngaysinhgai, thangsinhgai, namsinhgai
     } = params;
     let query = `${tentrai}-sinh-gio-ty-${ngaysinhtrai}-${thangsinhtrai}-${namsinhtrai}`;
     query += `-va-${tengai}-sinh-gio-ty-${ngaysinhgai}-${thangsinhgai}-${namsinhgai}/`;
-    request(`https://www.tuvikhoahoc.com/xem-boi-tinh-duyen/${query}`, 
+    let link = 'https://www.tuvikhoahoc.com/xem-boi-tinh-duyen/' + encodeURIComponent(query);
+    request(link, 
       (error, response, body) => {
         if (error) return reject(error);
         let $ = cheerio.load(body, { decodeEntities: false });

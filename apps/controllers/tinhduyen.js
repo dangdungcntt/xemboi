@@ -10,8 +10,9 @@ let getData = require('../helpers/getData');
 let router = express.Router();
 
 router.get('/:tentrai.:ngaysinhtrai.:thangsinhtrai.:namsinhtrai-:tengai.:ngaysinhgai.:thangsinhgai.:namsinhgai', (req, res) => {
+  let URL = decodeURIComponent(req.url);
   Image.findOne({ 
-		query: req.url,
+		query: URL,
 	})
 		.exec((err, image) => {
 			if (err || !image) {
@@ -21,7 +22,7 @@ router.get('/:tentrai.:ngaysinhtrai.:thangsinhtrai.:namsinhtrai-:tengai.:ngaysin
             let result = JSON.parse(body);
             if (result.success) {
               let newImage = new Image({
-                query: req.url,
+                query: URL,
                 fileName: result.fileName,
                 ext: result.ext,
                 time: new Date().getMilliseconds()
