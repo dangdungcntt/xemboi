@@ -11,7 +11,7 @@ You must have a ConnectionString of Mongodb and replace it in .env
 ```
 DB_STRING_URL=Your ConnectionString of Mongodb
 ```
-And you must have a api to generate image with data send from nodejs, api return json like 
+And you must have a api to generate image with data send from nodejs [Data Sample Here](https://apps.tentstudy.xyz/xem-boi/data-sample.txt), api return json like 
 ```
 {"success": true, "path": "path_to_dir_store_images","fileName":"name_of_image","ext":"ext_of_image"}
 //or
