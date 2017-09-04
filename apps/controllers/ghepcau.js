@@ -3,7 +3,7 @@ let express = require('express');
 let request = require('request');
 let cheerio = require('cheerio');
 
-let Image = require('../models/Image');
+let Image = require('../models/image');
 
 let getData = require('../helpers/getData');
 
