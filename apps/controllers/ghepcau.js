@@ -9,32 +9,32 @@ let getData = require('../helpers/getData');
 
 let router = express.Router();
 
-router.get('/:tentrai.:ngaysinhtrai.:thangsinhtrai.:namsinhtrai-:tengai.:ngaysinhgai.:thangsinhgai.:namsinhgai', (req, res) => {
+router.get('/:day.:month.:year', (req, res) => {
   let URL = decodeURIComponent(req.url);
   Image.findOne({ 
 		query: URL,
 	})
-		.exec((err, image) => {
-			if (err || !image) {
-        getData(req.params)
-        .then((response) => {
-          request.post({url: process.env.TINH_DUYEN_API, form: {data: response.data}}, (err, ress, body) => {
+		.exec((err, dob) => {
+			if (err || !dob) {
+          request.post({url: process.env.GHEP_CAU_API, form: {data: req.params}}, (err, ress, body) => {
+            // console.log(body);
+            // return;
             let result = JSON.parse(body);
             if (result.success) {
-              let newImage = new Image({
+              let newDoB = new Image({
                 query: URL,
                 fileName: result.fileName,
                 ext: result.ext,
                 time: new Date().getMilliseconds()
               });
-              newImage.save((err) => {
+              newDoB.save((err) => {
                 if (err) {
                   return console.log(err);
                 }
               });
               res.render('successPage', {
                 data: {
-                  file: 'tinhduyen/' + result.fileName + '.' + result.ext
+                  file: 'ghepcau/' + result.fileName + '.' + result.ext
                 }
               });
             } else {
@@ -42,12 +42,11 @@ router.get('/:tentrai.:ngaysinhtrai.:thangsinhtrai.:namsinhtrai-:tengai.:ngaysin
               res.render('errorPage');
             }
           });
-        });
         return;
       }
       return res.render('successPage', {
         data: {
-          file: 'tinhduyen/' +image.fileName + '.' + image.ext
+          file: 'ghepcau/' + image.fileName + '.' + image.ext
         }
       });
     })
@@ -60,7 +59,7 @@ router.get('/:tentrai.:ngaysinhtrai.:thangsinhtrai.:namsinhtrai-:tengai.:ngaysin
 });
 
 router.use('/', (req, res) => {
-    res.send('Tinhduyen home page');
+    res.send('Ghepcau home page');
 });
 
 module.exports = router;
