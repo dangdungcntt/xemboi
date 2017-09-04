@@ -14,8 +14,8 @@ router.get('/:day.:month.:year', (req, res) => {
   Image.findOne({ 
 		query: URL,
 	})
-		.exec((err, dob) => {
-			if (err || !dob) {
+		.exec((err, image) => {
+			if (err || !image) {
           request.post({url: process.env.GHEP_CAU_API, form: {data: req.params}}, (err, ress, body) => {
             // console.log(body);
             // return;
