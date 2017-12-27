@@ -17,7 +17,7 @@ router.get('/:t', (req, res) => {
 
 router.get('/', (req, res) => {
   // console.log(req)
-  res.status(301).redirect(`/cat/${new Date().getTime()}`);
+  res.redirect(`/cat/${new Date().getTime()}`, 301);
 });
 
 module.exports = router;
