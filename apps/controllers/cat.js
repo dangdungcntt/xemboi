@@ -12,7 +12,7 @@ const ucfirst = str => str.charAt(0).toUpperCase() + str.slice(1);
 
 router.get('/:t', (req, res) => {
   const url = 'http://iwanttodrawacatforyou.com/wp-content/uploads/';
-  res.send(`<meta property="og:image" content="${url}${Math.floor(Math.random() * 20000) + 100}.jpg" />`);
+  res.redirect(`${url}${Math.floor(Math.random() * 20000) + 100}.jpg`, 301);
 });
 
 router.get('/', (req, res) => {
