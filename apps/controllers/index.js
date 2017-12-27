@@ -5,6 +5,7 @@ let router = express.Router();
 router.use('/tinhduyen', require('./tinhduyen.js'));
 router.use('/ghepcau', require('./ghepcau.js'));
 router.use('/tv', require('./tv.js'));
+router.use('/cat', require('./cat.js'));
 router.use('/', (req, res) => {
     res.render('home');
 });
